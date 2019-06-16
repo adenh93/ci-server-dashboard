@@ -1,0 +1,74 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+$theme-foreground: #222437;
+$theme-background: #1C1E2F;
+$theme-neon-purple: #6201ED;
+$theme-neon-blue: #28c0b1;
+$theme-neon-green: #6bc96a;
+$theme-font-color: #f9f9f9;
+$theme-anchor:#3da5f4;
+
+body {
+    background-color: $theme-background;
+    color: $theme-font-color;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rubik', sans-serif;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.btn-primary {
+    background-color: $theme-neon-purple;
+    border-color: darken($theme-neon-purple, 5%);
+}
+
+.btn-primary:hover {
+    background-color: lighten($theme-neon-purple, 5%);
+    border-color: $theme-neon-purple;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    background-color: darken($theme-neon-purple, 10%);
+}
+
+.btn-default {
+    background-color: $theme-neon-blue;
+    border-color: darken($theme-neon-blue, 5%);
+    color: $theme-font-color;
+}
+
+.btn-default:hover {
+    background-color: lighten($theme-neon-blue, 5%);
+    color: $theme-font-color;
+}
+
+.btn-default:focus, .btn-default:active {
+    background-color: darken($theme-neon-blue, 5%);
+}
+
+input[type=text] {
+    background-color: lighten($theme-foreground, 10%);
+    border-color: $theme-foreground;
+    color: darken($theme-font-color, 10%);
+    border-radius: 0;
+}
+
+input[type=text]:focus {
+    background-color: lighten($theme-foreground, 15%);
+    color: darken($theme-font-color, 10%);
+    border: $theme-foreground;
+}
+
+[class*="success"] {
+    background-color: $theme-neon-green;
+}
+
+a {
+    color: $theme-anchor;
+}

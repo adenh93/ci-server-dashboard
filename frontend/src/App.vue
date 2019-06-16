@@ -1,29 +1,30 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <b-navbar toggleable="lg" type="dark" class="app-nav">
+      <b-navbar-brand href="#">CI Dashboard</b-navbar-brand>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+          </b-navbar-nav>
+        </b-collapse>
+    </b-navbar>
+    <b-container fluid>
+      <b-row>
+        <b-nav vertical class="app-nav sidebar col-md-1">
+          <b-nav-text class="pl-3">Servers</b-nav-text>
+          <b-nav-item class="pl-4" active>
+            <i class="icon-travis-ci ci-logo"/>
+             Travis CI
+          </b-nav-item>
+          <b-nav-item class="pl-4" active>
+            <i class="icon-jenkins ci-logo"/>
+             Jenkins
+          </b-nav-item>
+        </b-nav>
+        <main role="main" class="col-md-11">
+          <router-view />
+        </main>
+      </b-row>
+    </b-container>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
