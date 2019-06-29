@@ -4,3 +4,7 @@ sqlalchemy
 alembic
 aiosqlite
 databases
+passlib
+bcrypt
+pyjwt
+python-multipart

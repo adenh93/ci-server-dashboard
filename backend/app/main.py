@@ -1,19 +1,31 @@
-import databases
-import config
 from fastapi import FastAPI
-from api import router as api_router
+from starlette.requests import Request
+from starlette.responses import Response
+from .api import router as api_router
+from .config import DATABASE_URI
+from .db import db, SessionLocal
 
-database = databases.Database(config.DATABASE_URI)
+
 app = FastAPI()
-
 app.include_router(api_router, prefix="/api")
+
+
+@app.middleware("http")
+async def db_session_middleware(request: Request, call_next):
+    response = Response("Internal server error", status_code=500)
+    try:
+        request.state.db = SessionLocal()
+        response = await call_next(request)
+    finally:
+        request.state.db.close()
+    return response
 
 
 @app.on_event("startup")
 async def startup():
-    await database.connect()
+    await db.connect()
 
 
 @app.on_event("shutdown")
 async def shutdown():
-    await database.disconnect()
+    await db.disconnect()
