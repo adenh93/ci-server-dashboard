@@ -28,5 +28,5 @@ class UserDetails(BaseModel):
     id: int
     username: str
     email: str
-    display_name: str
+    name: str
     keys: List[ApiKey] = []

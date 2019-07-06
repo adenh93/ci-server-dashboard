@@ -8,3 +8,4 @@ passlib
 bcrypt
 pyjwt
 python-multipart
+cryptography
