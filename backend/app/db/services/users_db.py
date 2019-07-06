@@ -1,7 +1,7 @@
 from datetime import datetime
-from .tables import users
-from ..models.auth import UserRegistrationRequest
-from . import db
+from ..tables import users
+from ...models.auth import UserRegistrationRequest
+from .. import db
 
 
 async def get_user_by_username(username: str):

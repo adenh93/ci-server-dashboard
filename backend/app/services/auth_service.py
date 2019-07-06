@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-from ..db import users_db, user_logins_db
+from ..db.services import users_db, user_logins_db
 from ..models.auth import (
     UserRegistrationRequest
 )

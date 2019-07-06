@@ -1,6 +1,6 @@
-from .tables import user_api_keys
-from ..models.ci import UserApiKeyRequest
-from . import db
+from ..tables import user_api_keys
+from ...models.ci import UserApiKeyRequest
+from .. import db
 
 
 async def get_api_keys_for_user(user_id: int):

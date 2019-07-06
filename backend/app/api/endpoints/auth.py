@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from datetime import timedelta
 from ...models.auth import Token, UserRegistrationRequest
 from ...utils.auth_utils import authenticate_user, create_access_token
-from ...services.auth import insert_user, insert_user_login
+from ...services.auth_service import insert_user, insert_user_login
 from ...config import ACCESS_TOKEN_EXPIRY_MINUTES
 
 router = APIRouter()

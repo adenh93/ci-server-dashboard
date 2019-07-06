@@ -1,6 +1,6 @@
 from datetime import datetime
-from .tables import user_logins
-from . import db
+from ..tables import user_logins
+from .. import db
 
 
 async def insert_user_login(user_id: int):

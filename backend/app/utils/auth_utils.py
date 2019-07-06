@@ -8,7 +8,7 @@ from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 from ..config import SECRET_KEY, ENCODE_ALGORITHM
-from ..db import users_db, api_keys_db
+from ..db.services import users_db, api_keys_db
 from ..models.auth import (
     TokenData, UserRegistrationRequest, UserDetails, ApiKey
 )
