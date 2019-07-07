@@ -13,7 +13,7 @@ class TokenData(BaseModel):
 
 
 class ApiKey(BaseModel):
-    service: CIService
+    service: str
     key: str
 
 

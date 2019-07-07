@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 from ..config import SECRET_KEY, ENCODE_ALGORITHM
 from ..db.services import users_db, api_keys_db
+from ..utils.crypto_utils import decrypt_key
 from ..models.auth import (
     TokenData, UserRegistrationRequest, UserDetails, ApiKey
 )
@@ -56,5 +57,9 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
     user_keys = await api_keys_db.get_api_keys_for_user(user.id)
     user_details = UserDetails(**user)
-    user_details.keys = [ApiKey(**key) for key in user_keys]
+    user_details.keys = [ApiKey(
+        service=key.service,
+        key=decrypt_key(key.key)
+    ) for key in user_keys]
+    print(user_details.keys)
     return user_details
