@@ -8,7 +8,3 @@ async def insert_api_key(request: UserApiKeyRequest):
     request.key = encrypt_key(request.key)
     id = await api_keys_db.insert_api_key(request)
     return id
-
-
-async def get_builds(service: str):
-    pass

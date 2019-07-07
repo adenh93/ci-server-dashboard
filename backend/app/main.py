@@ -6,7 +6,7 @@ from .api import router as api_router
 from .config import DATABASE_URI
 from .db import db
 
-app = FastAPI()
+app = FastAPI(title='CI Dashboard')
 app.include_router(api_router, prefix="/api")
 
 

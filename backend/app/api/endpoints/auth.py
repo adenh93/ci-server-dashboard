@@ -12,8 +12,13 @@ from ...config import ACCESS_TOKEN_EXPIRY_MINUTES
 router = APIRouter()
 
 
-@router.post("/login", response_model=Token)
+@router.post("/login", tags=['auth'], response_model=Token)
 async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    """
+    Accepts a username and password submitted via form-data, and attempts to
+    authenticate the user. Returns a temporary access token if authentication
+    is successful.
+    """
     user = await authenticate_user(form_data.username, form_data.password)
     if not user:
         raise HTTPException(
@@ -29,7 +34,11 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.post("/register", status_code=HTTP_201_CREATED)
+@router.post("/register", tags=['auth'], status_code=HTTP_201_CREATED)
 async def register(request: UserRegistrationRequest):
+    """
+    Allows the user to register a new account in the system. Accepts JSON
+    via the HTTP request body.
+    """
     user_id = await insert_user(request)
     return {'id': user_id}

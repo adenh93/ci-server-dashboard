@@ -14,20 +14,7 @@ from ..models.auth import (
 )
 
 crypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
-
-
-async def logged_in():
-    def real_decorator(f):
-        def wraps(*args, **kwargs):
-            user = get_current_user()
-            if user:
-                return f(*args, **kwargs)
-            return HTTPException(
-                status_code=HTTP_403_FORBIDDEN
-            )
-        return functools.update_wrapper(wraps, f)
-    return real_decorator
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
 
 async def authenticate_user(username: str, password: str):
