@@ -61,5 +61,4 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         service=key.service,
         key=decrypt_key(key.key)
     ) for key in user_keys]
-    print(user_details.keys)
     return user_details

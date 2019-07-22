@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: darken($theme-neon-blue, 5%);
 }
 
-input[type=text] {
+input[type=text], input[type=email], input[type=password] {
     background-color: lighten($theme-foreground, 10%);
     border-color: $theme-foreground;
     color: darken($theme-font-color, 10%);

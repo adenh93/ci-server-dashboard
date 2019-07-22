@@ -1,4 +1,4 @@
-export interface Build {
+export interface IBuild {
     slug: string;
     build_status: string;
     build_completed_time: Date;
@@ -14,4 +14,13 @@ export interface Build {
 export interface BuildArtifact {
     file_name: string;
     file_size: number;
+}
+
+export interface IAuthToken {
+    access_token: string;
+}
+
+export interface ILoginResponse {
+    access_token: IAuthToken;
+    travis_token: IAuthToken;
 }
