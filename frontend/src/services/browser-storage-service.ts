@@ -3,9 +3,9 @@ import { IAuthToken } from '@/typings/model';
 
 export interface IBrowserStorageService {
     setTravisAuth(token: IAuthToken): void;
-    getTravisAuth(): any;
+    getTravisAuth(): string;
     setDashboardAuth(token: IAuthToken): void;
-    getDashboardAuth(): any;
+    getDashboardAuth(): string;
 }
 
 @injectable()
@@ -15,16 +15,20 @@ export class BrowserStorageService implements IBrowserStorageService {
         this.setItem('travis-auth', token);
     }
 
-    getTravisAuth(): IAuthToken {
-        return this.getItem<IAuthToken>('travis-auth');
+    getTravisAuth(): string {
+        var auth = this.getItem<IAuthToken>('travis-auth');
+        if (auth) return auth.access_token;
+        return '';
     }
 
     setDashboardAuth(token: IAuthToken): void {
         this.setItem('dashboard-auth', token);
     }
 
-    getDashboardAuth(): IAuthToken {
-        return this.getItem<IAuthToken>('dashboard-auth');
+    getDashboardAuth(): string {
+        var auth = this.getItem<IAuthToken>('dashboard-auth');
+        if (auth) return auth.access_token;
+        return '';
     }
 
     setItem(key: string, data: any): void {
@@ -32,10 +36,10 @@ export class BrowserStorageService implements IBrowserStorageService {
         sessionStorage.setItem(key, toStore);
     }
 
-    getItem<T>(key: string): T {
+    getItem<T>(key: string): T | null {
         var data = sessionStorage.getItem(key);
         if (!data) {
-            throw new Error(`No item present for key: ${key}`)
+            return null;
         }
         return JSON.parse(data);
     }

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { injectable, inject } from 'inversify';
 import { IBrowserStorageService } from './browser-storage-service'
 import { TYPES } from '@/ioc/types';
+import { IAuthToken } from '@/typings/model';
 
 export interface IHttpService {
     getTravis<T>(url: string, params?:any): Promise<T>;
@@ -52,10 +53,7 @@ export class HttpService implements IHttpService {
             params: params
         }
 
-        return await axios.get<T, T>(this.apiBaseUrl + url, options)
-            .then((response) => {
-                return response;
-            })
+        return await axios.get<T, T>(url, options)
             .catch((error) => {
                 throw new Error(error);
             }
@@ -67,10 +65,7 @@ export class HttpService implements IHttpService {
             headers: {'Authentication': `Bearer ${token}`}
         }
 
-        return await axios.post<T, T>(this.apiBaseUrl + url, data, options)
-            .then((response) => {
-                return response;
-            })
+        return await axios.post<any, T>(url, data)
             .catch((error) => {
                 throw new Error(error);
             }

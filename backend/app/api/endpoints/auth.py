@@ -4,7 +4,7 @@ from starlette.responses import JSONResponse
 from starlette.status import HTTP_401_UNAUTHORIZED, HTTP_201_CREATED
 from sqlalchemy.orm import Session
 from datetime import timedelta
-from ...models.auth import Token, UserRegistrationRequest
+from ...models.auth import Token, UserRegistrationRequest, UserLoginRequest
 from ...utils.auth_utils import authenticate_user, create_access_token
 from ...services.auth_service import insert_user, insert_user_login
 from ...config import ACCESS_TOKEN_EXPIRY_MINUTES
@@ -13,13 +13,13 @@ router = APIRouter()
 
 
 @router.post("/login", tags=['auth'], response_model=Token)
-async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+async def login(request: UserLoginRequest):
     """
-    Accepts a username and password submitted via form-data, and attempts to
+    Accepts a username and password submitted via JSON, and attempts to
     authenticate the user. Returns a temporary access token if authentication
     is successful.
     """
-    user = await authenticate_user(form_data.username, form_data.password)
+    user = await authenticate_user(request.username, request.password)
     if not user:
         raise HTTPException(
             status_code=HTTP_401_UNAUTHORIZED,

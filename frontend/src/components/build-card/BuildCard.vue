@@ -31,11 +31,11 @@
 
 <script lang="ts">
   import { Component, Prop, Vue } from "vue-property-decorator";
-  import { Build, BuildArtifact } from "@/typings/model";
+  import { IBuild, IBuildArtifact } from "@/typings/model";
 
   @Component
   export default class BuildCard extends Vue {
-    @Prop() private build: Build;
+    @Prop() private build: IBuild;
   }
 </script>
 

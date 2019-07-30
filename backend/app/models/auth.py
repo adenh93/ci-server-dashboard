@@ -17,6 +17,11 @@ class ApiKey(BaseModel):
     key: str
 
 
+class UserLoginRequest(BaseModel):
+    username: str
+    password: str
+
+
 class UserRegistrationRequest(BaseModel):
     username: str
     email: str

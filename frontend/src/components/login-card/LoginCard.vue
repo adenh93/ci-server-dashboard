@@ -4,16 +4,13 @@
             <b-card-title>Login</b-card-title>
             <b-card-text>
                 <b-form>
-                    <b-form-group label="Email Address:">
-                        <b-form-input name="username" type="email" required placeholder="Enter email..."/>
-                    </b-form-group>
-                    <b-form-group label="Display Name:">
-                        <b-form-input name="name" type="text" required placeholder="Enter display name..."/>
+                    <b-form-group label="Username:">
+                        <b-form-input v-model="loginRequest.username" type="text" placeholder="Enter username..." required/>
                     </b-form-group>
                     <b-form-group label="Password:">
-                        <b-form-input name="password" type="password" required placeholder="Enter password..."/>
+                        <b-form-input v-model="loginRequest.password" type="password" placeholder="Enter password..." required/>
                     </b-form-group>
-                    <b-button variant="primary" type="submit" v-on:click="login()">Submit</b-button>
+                    <b-button variant="primary" role="button" v-on:click="login()">Submit</b-button>
                 </b-form>
             </b-card-text>
         </b-card-body>
@@ -24,18 +21,22 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
-  import { IAuthService } from "@/services/auth-service";
-  import { lazyInject } from '@/ioc/container'
-  import { TYPES } from '@/ioc/types'
+  import { Component, Vue, Prop } from "vue-property-decorator";
+  import { IAuthService } from "../../services/auth-service";
+  import { lazyInject } from '../../ioc/container';
+  import { TYPES } from '../../ioc/types';
+  import { ILoginRequest } from '../../typings/model';
 
   @Component
   export default class LoginCard extends Vue {
-    @lazyInject(TYPES.IAuthService)
-    authService: IAuthService;
+    @lazyInject(TYPES.IAuthService) private authService: IAuthService;
+    @Prop() loginRequest: ILoginRequest = {}; 
 
-    login(formData: any) {
-        //TODO
+    login() {
+        this.authService.login(this.loginRequest)
+            .then((request) => {
+
+            });
     }
   }
 </script>

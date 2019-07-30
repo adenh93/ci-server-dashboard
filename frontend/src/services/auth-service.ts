@@ -1,7 +1,7 @@
 import { IHttpService } from '@/services/http-service';
 import { IBrowserStorageService } from '@/services/browser-storage-service';
 import { inject, injectable } from 'inversify';
-import { ILoginResponse } from '@/typings/model';
+import { ILoginRequest, ILoginResponse } from '@/typings/model';
 import { TYPES } from '@/ioc/types';
 
 export interface IAuthService {
@@ -19,8 +19,8 @@ export class AuthService implements IAuthService {
     ) {
     }
 
-    async login(formData: any): Promise<void> {
-        this.httpService.postApi<ILoginResponse>('auth/login', formData)
+    async login(request: ILoginRequest): Promise<void> {
+        this.httpService.postApi<ILoginResponse>('auth/login', request)
             .then((response) => {
                 this.browserStorageService.setDashboardAuth(response.access_token);
                 if(response.travis_token) {

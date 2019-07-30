@@ -5,6 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Config keys start here
 DATABASE_URI = 'sqlite:///app/db/dashboard.db'
+ALLOWED_HOSTS = ['http://localhost:8080']
 SECRET_KEY = SECRET_KEY
 FERNET_KEY = FERNET_KEY
 ENCODE_ALGORITHM = 'HS256'
