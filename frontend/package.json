@@ -37,7 +37,8 @@
     "sass-loader": "^7.1.0",
     "typescript": "3.4.5",
     "vue-axios": "^2.1.4",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vue-toastr": "^2.1.2"
   },
   "eslintConfig": {
     "root": true,

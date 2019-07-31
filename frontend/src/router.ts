@@ -11,8 +11,22 @@ export default new Router({
   routes: [
     {
       path: "/",
+      beforeEnter: getAuthorised,
       name: "home",
+      component: Home
+    },
+    {
+      path: "/login",
+      name: "login",
       component: Login
     }
   ]
 });
+
+function getAuthorised(to: any, from: any, next: any) {
+  if(sessionStorage.getItem('dashboard-auth')) {
+    next();
+  } else {
+    next('/login');
+  }
+}

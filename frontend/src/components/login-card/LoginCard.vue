@@ -23,19 +23,25 @@
 <script lang="ts">
   import { Component, Vue, Prop } from "vue-property-decorator";
   import { IAuthService } from "../../services/auth-service";
+  import { INotificationService } from "../../services/notification-service";
   import { lazyInject } from '../../ioc/container';
   import { TYPES } from '../../ioc/types';
   import { ILoginRequest } from '../../typings/model';
+  import router from "../../router";
 
   @Component
   export default class LoginCard extends Vue {
     @lazyInject(TYPES.IAuthService) private authService: IAuthService;
+    @lazyInject(TYPES.INotificationService) private notificationService: INotificationService;
     @Prop() loginRequest: ILoginRequest = {}; 
 
     login() {
         this.authService.login(this.loginRequest)
             .then((request) => {
-
+                router.push({ name: 'home' })
+                this.notificationService.success(this, "Successfully logged in");
+            }).catch((error: Error) => {
+                this.notificationService.error(this, error.message);
             });
     }
   }
